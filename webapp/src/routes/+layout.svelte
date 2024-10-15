@@ -3,9 +3,7 @@
 
 	import Footer from '$lib/components/Footer.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import NavBarLink from '$lib/components/navbar/NavBarLink.svelte';
 	import ThemeToggle from '$lib/components/navbar/ThemeToggle.svelte';
-	import LogoGithub from 'svelte-icons/io/IoLogoGithub.svelte';
 	import '../app.css';
 
 	let dark: boolean;
@@ -22,18 +20,18 @@
 	async function getTheme() {
 		if (browser) {
 			const savedMode = window.localStorage.getItem('isDarkMode');
-			dark = savedMode ? savedMode === 'true' : false;
+			dark = savedMode ? savedMode === 'true' : savedMode === 'false' ? false : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 			window.localStorage.setItem('isDarkMode', String(dark));
 		}
 	}
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING} — Securely share your Obsidian notes with one click.</title
+	<title>{import.meta.env.VITE_BRANDING}.</title
 	>
 	<meta
 		name="title"
-		content="Noteshare.space — Securely share your Obsidian notes with one click."
+		content="notes.hvck.space - my notes"
 	/>
 	<meta
 		name="description"
@@ -73,24 +71,8 @@
 			<div class="top-0 left-0 right-0">
 				<NavBar>
 					<svelte:fragment slot="left">
-						<NavBarLink href="/about">About</NavBarLink>
-						<NavBarLink href="/install">Get plugin</NavBarLink>
-						<NavBarLink href="/contact">Contact</NavBarLink>
 					</svelte:fragment>
 					<svelte:fragment slot="right">
-						<NavBarLink href="https://obsidian.md"
-							><span class="text-[#705dcf] font-bold">Get Obsidian</span></NavBarLink
-						>
-						<NavBarLink href="https://github.com/mcndt/noteshare.space">
-							<span class="flex gap-2 items-center justify-center">
-								<span class="text-black dark:text-zinc-200 md:hidden whitespace-nowrap">GitHub</span
-								>
-								<span
-									class="inline-block h-6 w-6 text-black dark:text-zinc-200 md:dark:text-zinc-300"
-									><LogoGithub /></span
-								>
-							</span>
-						</NavBarLink>
 						<ThemeToggle bind:dark />
 					</svelte:fragment>
 					></NavBar
