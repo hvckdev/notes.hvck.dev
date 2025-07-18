@@ -24,10 +24,14 @@ RUN echo $DATABASE_URL
 WORKDIR /app
 
 # Install prisma for the migration
-RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 RUN npm install -g prisma --unsafe-perm
 
 # Copy schema and migration folder
 ADD ./ ./prisma/
+
+RUN apk update \
+    && apk add --no-cache openssl\
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apk/*
 
 CMD [ "prisma", "migrate", "deploy"]
