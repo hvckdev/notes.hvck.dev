@@ -28,7 +28,6 @@ WORKDIR /app
 COPY --from=0 /app .
 
 ENV PORT 8080
-ENV PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING 1
 EXPOSE 8080
 
 CMD ["node", "./build/src/server.js"]
