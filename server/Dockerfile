@@ -1,4 +1,4 @@
-FROM node:16-alpine AS BUILD_IMAGE
+FROM node:20-alpine3.20 AS BUILD_IMAGE
 
 
 # install dependencies
