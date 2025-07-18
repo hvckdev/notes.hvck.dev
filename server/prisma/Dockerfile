@@ -17,13 +17,14 @@
 # CMD ["npx", "prisma migrate deploy
 
 FROM node:18-alpine
-RUN apk add --no-cache libssl1.1
+
 RUN echo $DATABASE_URL
 
 # Create app directory
 WORKDIR /app
 
 # Install prisma for the migration
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 RUN npm install -g prisma --unsafe-perm
 
 # Copy schema and migration folder
