@@ -1,6 +1,5 @@
 FROM node:20-alpine3.20 AS BUILD_IMAGE
 
-
 # install dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -8,6 +7,13 @@ RUN npm ci
 
 # Copy all local files into the image.
 COPY . .
+
+RUN apk update \
+    && apk add --no-cache openssl\
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apk/*
+
+RUN [ ! -e /lib/libssl.so.1.1 ] && ln -s /usr/lib/libssl.so.1.1 /lib/libssl.so.1.1 || echo "Link already exists"
 
 RUN npx prisma generate
 
