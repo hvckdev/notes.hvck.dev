@@ -5,11 +5,11 @@ services:
   traefik:
     image: "traefik:v2.8"
     command:
-      - "--api.insecure=true"  # allows accessing a Traefik dashboard, disable in production
-      - "--providers.docker=true"  # enables the Docker configuration discovery
-      - "--providers.docker.exposedbydefault=false"  # do not expose Docker services by default
-      - "--entrypoints.web.address=:5000"  # create an entrypoint called web, listening on :5000
-      - "--entrypoints.admin.address=:3333"  # create an entrypoint called web, listening on :5000
+      - "--api.insecure=true" # allows accessing a Traefik dashboard, disable in production
+      - "--providers.docker=true" # enables the Docker configuration discovery
+      - "--providers.docker.exposedbydefault=false" # do not expose Docker services by default
+      - "--entrypoints.web.address=:5000" # create an entrypoint called web, listening on :5000
+      - "--entrypoints.admin.address=:3333" # create an entrypoint called web, listening on :5000
     ports:
       - "5000:5000"
       - "3333:3333"
@@ -17,7 +17,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-  # Prisma sqlite migration utility 
+  # Prisma sqlite migration utility
   migrate:
     build:
       context: ./server/prisma
@@ -26,17 +26,17 @@ services:
       - sqlite:/database/
     environment:
       - DATABASE_URL=file:/database/db.sqlite
-  
-  # Backend server for managing saved notes 
+
+  # Backend server for managing saved notes
   backend:
-    build: 
+    build:
       context: ./server
       dockerfile: Dockerfile
     volumes:
       - sqlite:/database/
     environment:
       - DATABASE_URL=file:/database/db.sqlite
-      - FRONTEND_URL=http://localhost:5000
+      - FRONTEND_URL=http://127.0.0.1:5000
       - CLEANUP_INTERVAL_SECONDS=600
       - NODE_ENV=production
       # Rate limit for uploading notes
@@ -50,27 +50,27 @@ services:
         condition: service_completed_successfully
     restart: unless-stopped
     labels:
-      - "traefik.enable=true"  # tell Traefik this is something we would like to expose
-      - "traefik.http.routers.backend.entrypoints=web"  # what entrypoint should be used for the backend service.
-      - "traefik.http.routers.backend.rule=Host(`localhost`) && PathPrefix(`/api`) && (Method(`POST`) || Method(`DELETE`))"  # 
+      - "traefik.enable=true" # tell Traefik this is something we would like to expose
+      - "traefik.http.routers.backend.entrypoints=web" # what entrypoint should be used for the backend service.
+      - "traefik.http.routers.backend.rule=Host(`127.0.0.1`) && PathPrefix(`/api`) && (Method(`POST`) || Method(`DELETE`))" #
 
   # Frontend for serving encrypted notes over HTML (SvelteKit)
   frontend:
-    build: 
+    build:
       context: ./webapp
       dockerfile: Dockerfile
       args:
         - VITE_SERVER_INTERNAL=http://backend:8080
-        - VITE_BRANDING=Noteshare.space [preview]
+        - VITE_BRANDING=notes.hvck.dev
     environment:
-        - NODE_ENV=production
+      - NODE_ENV=production
     depends_on:
       - backend
     restart: unless-stopped
     labels:
-      - "traefik.enable=true"  # tell Traefik this is something we would like to expose
-      - "traefik.http.routers.frontend.entrypoints=web"  # what entrypoint should be used for the frontend service.
-      - "traefik.http.routers.frontend.rule=Host(`localhost`)"  # 
+      - "traefik.enable=true" # tell Traefik this is something we would like to expose
+      - "traefik.http.routers.frontend.entrypoints=web" # what entrypoint should be used for the frontend service.
+      - "traefik.http.routers.frontend.rule=Host(`127.0.0.1`)" #
 
   # grafana dashboard
   grafana:
@@ -83,9 +83,9 @@ services:
     environment:
       - GF_INSTALL_PLUGINS=frser-sqlite-datasource
     labels:
-    - "traefik.enable=true"  # tell Traefik this is something we would like to expose
-    - "traefik.http.routers.grafana.entrypoints=admin"  # what entrypoint should be used for the frontend service.
-    - "traefik.http.routers.grafana.rule=Host(`localhost`)"  # 
+      - "traefik.enable=true" # tell Traefik this is something we would like to expose
+      - "traefik.http.routers.grafana.entrypoints=admin" # what entrypoint should be used for the frontend service.
+      - "traefik.http.routers.grafana.rule=Host(`127.0.0.1`)" #
 
 volumes:
   sqlite:
