@@ -1,4 +1,4 @@
-FROM node:16-alpine AS BUILD_IMAGE
+FROM node:18-alpine AS BUILD_IMAGE
 
 ARG VITE_SERVER_INTERNAL $VITE_SERVER_INTERNAL
 ARG VITE_BRANDING $VITE_BRANDING
@@ -16,7 +16,7 @@ RUN npm run build
 # remove development dependencies
 RUN npm prune --production
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 COPY --from=BUILD_IMAGE /app .
