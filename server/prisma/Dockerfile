@@ -30,8 +30,10 @@ RUN npm install -g prisma --unsafe-perm
 ADD ./ ./prisma/
 
 RUN apk update \
-    && apk add --no-cache openssl libssl1.1\
+    && apk add --no-cache openssl\
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apk/*
+
+RUN [ ! -e /lib/libssl.so.1.1 ] && ln -s /usr/lib/libssl.so.1.1 /lib/libssl.so.1.1 || echo "Link already exists"
 
 CMD [ "prisma", "migrate", "deploy"]
