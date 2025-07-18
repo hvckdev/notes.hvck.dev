@@ -16,7 +16,7 @@
 
 # CMD ["npx", "prisma migrate deploy
 
-FROM node:16-alpine
+FROM node:18-alpine
 RUN echo $DATABASE_URL
 
 # Create app directory
