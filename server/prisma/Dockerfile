@@ -30,7 +30,7 @@ RUN npm install -g prisma --unsafe-perm
 ADD ./ ./prisma/
 
 RUN apk update \
-    && apk add --no-cache openssl\
+    && apk add --no-cache openssl libssl1.1\
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apk/*
 
