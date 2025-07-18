@@ -16,7 +16,7 @@
 
 # CMD ["npx", "prisma migrate deploy
 
-FROM node:18-alpine
+FROM node:20-alpine3.20
 
 RUN echo $DATABASE_URL
 
