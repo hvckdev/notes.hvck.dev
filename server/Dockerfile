@@ -14,6 +14,7 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 RUN ln -s /usr/lib/libssl.so.1.1 /lib/libssl.so.1.1
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 
 RUN npx prisma generate
 
