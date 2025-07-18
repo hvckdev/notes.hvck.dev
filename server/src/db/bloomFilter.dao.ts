@@ -14,7 +14,7 @@ interface IDeserializedFilter {
  */
 export async function getFilter<T extends BaseFilter>(
   name: string,
-  cls: IDeserializedFilter
+  cls: IDeserializedFilter,
 ): Promise<T> {
   const bloomFilter = await prisma.bloomFilter.findUniqueOrThrow({
     where: {
@@ -33,7 +33,7 @@ export async function getFilter<T extends BaseFilter>(
  */
 export async function upsertFilter(
   name: string,
-  filter: BaseFilter
+  filter: BaseFilter,
 ): Promise<void> {
   const serializedFilter = serializeFilter(filter);
   await prisma.bloomFilter.upsert({
@@ -50,18 +50,18 @@ export async function upsertFilter(
   });
 }
 
-function serializeFilter(filter: BaseFilter): Buffer {
+function serializeFilter(filter: BaseFilter): Uint8Array {
   const filterJSON = filter.saveAsJSON();
   const filterString = JSON.stringify(filterJSON);
-  const filterBuffer = Buffer.from(filterString, "utf-8");
+  const filterBuffer = Uint8Array.from(filterString);
   return filterBuffer;
 }
 
 function deserializeFilter<T extends BaseFilter>(
-  serializedFilter: Buffer,
-  cls: IDeserializedFilter
+  serializedFilter: Uint8Array,
+  cls: IDeserializedFilter,
 ): T {
-  const filterString = serializedFilter.toString("utf-8");
+  const filterString = serializedFilter.toString();
   const filterJSON = JSON.parse(filterString);
   const filter = cls.fromJSON(filterJSON) as T;
   return filter;
