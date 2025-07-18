@@ -34,4 +34,6 @@ RUN apk update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apk/*
 
+RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
+
 CMD [ "prisma", "migrate", "deploy"]
