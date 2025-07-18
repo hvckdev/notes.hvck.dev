@@ -70,7 +70,7 @@ services:
     labels:
       - "traefik.enable=true" # tell Traefik this is something we would like to expose
       - "traefik.http.routers.frontend.entrypoints=web" # what entrypoint should be used for the frontend service.
-      - "traefik.http.routers.frontend.rule=Host(`127.0.0.1`)" #
+      - "traefik.http.routers.frontend.rule=Host(`notes.hvck.dev`)" #
 
   # grafana dashboard
   grafana:
@@ -85,7 +85,7 @@ services:
     labels:
       - "traefik.enable=true" # tell Traefik this is something we would like to expose
       - "traefik.http.routers.grafana.entrypoints=admin" # what entrypoint should be used for the frontend service.
-      - "traefik.http.routers.grafana.rule=Host(`127.0.0.1`)" #
+      - "traefik.http.routers.grafana.rule=Host(`notes.hvck.dev`)" #
 
 volumes:
   sqlite:
