@@ -20,19 +20,19 @@
 	async function getTheme() {
 		if (browser) {
 			const savedMode = window.localStorage.getItem('isDarkMode');
-			dark = savedMode ? savedMode === 'true' : savedMode === 'false' ? false : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			dark = savedMode
+				? savedMode === 'true'
+				: savedMode === 'false'
+				? false
+				: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 			window.localStorage.setItem('isDarkMode', String(dark));
 		}
 	}
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING}.</title
-	>
-	<meta
-		name="title"
-		content="notes.hvck.space - my notes"
-	/>
+	<title>{import.meta.env.VITE_BRANDING}.</title>
+	<meta name="title" content="notes.hvck.space - my notes" />
 	<meta
 		name="description"
 		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
@@ -40,29 +40,23 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://noteshare.space/" />
-	<meta
-		property="og:title"
-		content="Noteshare.space — Securely share your Obsidian notes with one click."
-	/>
+	<meta property="og:url" content="https://notes.hvck.dev/" />
+	<meta property="og:title" content="notes.hvck.dev ~ my notes" />
 	<meta
 		property="og:description"
 		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
 	/>
-	<meta property="og:image" content="https://noteshare.space/meta.png" />
+	<meta property="og:image" content="https://notes.hvck.dev/meta.png" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://noteshare.space/" />
-	<meta
-		property="twitter:title"
-		content="Noteshare.space — Securely share your Obsidian notes with one click."
-	/>
+	<meta property="twitter:url" content="https://notes.hvck.dev/" />
+	<meta property="twitter:title" content="notes.hvck.dev — my notes" />
 	<meta
 		property="twitter:description"
 		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
 	/>
-	<meta property="twitter:image" content="https://noteshare.space/meta.png" />
+	<meta property="twitter:image" content="https://notes.hvck.dev/meta.png" />
 </svelte:head>
 
 <div class=" h-full {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
@@ -70,8 +64,7 @@
 		<div class="z-50 sticky top-0 w-full bg-white dark:bg-background-dark transition-colors">
 			<div class="top-0 left-0 right-0">
 				<NavBar>
-					<svelte:fragment slot="left">
-					</svelte:fragment>
+					<svelte:fragment slot="left" />
 					<svelte:fragment slot="right">
 						<ThemeToggle bind:dark />
 					</svelte:fragment>
