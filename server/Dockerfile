@@ -13,7 +13,7 @@ RUN apk update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apk/*
 
-RUN [ ! -e /lib/libssl.so.1.1 ] && ln -s /usr/lib/libssl.so.1.1 /lib/libssl.so.1.1 || echo "Link already exists"
+RUN ln -s /usr/lib/libssl.so.1.1 /lib/libssl.so.1.1
 
 RUN npx prisma generate
 
