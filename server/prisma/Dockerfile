@@ -17,6 +17,7 @@
 # CMD ["npx", "prisma migrate deploy
 
 FROM node:18-alpine
+RUN apk add --no-cache libssl1.1
 RUN echo $DATABASE_URL
 
 # Create app directory
