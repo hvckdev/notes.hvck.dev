@@ -36,7 +36,7 @@ services:
       - sqlite:/database/
     environment:
       - DATABASE_URL=file:/database/db.sqlite
-      - FRONTEND_URL=https://notes.hvck.dev:5000
+      - FRONTEND_URL=https://notes.hvck.dev
       - CLEANUP_INTERVAL_SECONDS=600
       - NODE_ENV=production
       # Rate limit for uploading notes
