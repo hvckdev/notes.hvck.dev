@@ -3,7 +3,7 @@ version: "3.7"
 services:
   # Reverse proxy
   traefik:
-    image: "traefik:v2.8"
+    image: "traefik:v3.6"
     command:
       - "--api.insecure=true" # allows accessing a Traefik dashboard, disable in production
       - "--providers.docker=true" # enables the Docker configuration discovery
