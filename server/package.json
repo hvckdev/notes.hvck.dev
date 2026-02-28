@@ -17,6 +17,7 @@
   "author": "Maxime Cannoodt (mcndt)",
   "license": "MIT",
   "dependencies": {
+    "@prisma/adapter-libsql": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "bloom-filters": "^3.0.0",
     "body-parser": "^1.20.0",
