@@ -35,7 +35,7 @@ export async function upsertFilter(
   name: string,
   filter: BaseFilter,
 ): Promise<void> {
-  const serializedFilter = serializeFilter(filter);
+  const serializedFilter = new Uint8Array(serializeFilter(filter));
   await prisma.bloomFilter.upsert({
     where: {
       name: name,

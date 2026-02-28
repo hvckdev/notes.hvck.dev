@@ -3,7 +3,8 @@ FROM node:20-alpine3.20 AS BUILD_IMAGE
 # install dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install
+
 
 # Copy all local files into the image.
 COPY . .
