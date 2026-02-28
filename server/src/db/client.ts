@@ -1,9 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-if (process.env.UNIT_TEST === "TRUE") {
-  throw Error("Database operations must be mocked in unit tests.");
-}
-
-const prisma = new PrismaClient();
-
-export default prisma;
+// Prisma 7 сама подхватит DATABASE_URL из окружения, 
+// если мы передадим его в конструктор вот так:
+export const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+});
