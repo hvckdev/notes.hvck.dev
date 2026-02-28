@@ -1,5 +1,5 @@
 import { event } from "@prisma/client";
-import prisma from "../db/client";
+import { prisma } from "../db/client";
 import logger from "./logger";
 
 export enum EventType {
@@ -28,11 +28,11 @@ export interface WriteEvent extends ClientEvent {
   expire_window_days?: number;
 }
 
-interface DeleteEvent extends ClientEvent {}
+interface DeleteEvent extends ClientEvent { }
 
-interface UpdateEvent extends ClientEvent {}
+interface UpdateEvent extends ClientEvent { }
 
-interface ReadEvent extends ClientEvent {}
+interface ReadEvent extends ClientEvent { }
 
 interface PurgeEvent extends Event {
   note_id: string;

@@ -1,7 +1,7 @@
 import { app } from "./app";
 import supertest from "supertest";
 import { describe, it, expect } from "vitest";
-import prisma from "./db/client";
+import { prisma } from "./db/client";
 import { deleteExpiredNotes } from "./tasks/deleteExpiredNotes";
 import { EventType } from "./logging/EventLogger";
 

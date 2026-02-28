@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import prisma from "../db/client";
+import { prisma } from "../db/client";
 import EventLogger, { EventType } from "./EventLogger";
 
 describe("Logging write events", () => {

@@ -1,5 +1,5 @@
 import { BaseFilter } from "bloom-filters";
-import prisma from "../db/client";
+import { prisma } from "../db/client";
 
 interface IDeserializedFilter {
   fromJSON: (json: JSON) => BaseFilter;
