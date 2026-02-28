@@ -1,9 +1,4 @@
 import { PrismaClient } from '@prisma/client';
 
-export const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+// Prisma сама найдет process.env.DATABASE_URL
+export const prisma = new PrismaClient();
