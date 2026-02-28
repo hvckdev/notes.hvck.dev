@@ -35,7 +35,7 @@
 	<meta name="title" content="notes.hvck.space - my notes" />
 	<meta
 		name="description"
-		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
+		content="shared note"
 	/>
 
 	<!-- Open Graph / Facebook -->
@@ -44,7 +44,7 @@
 	<meta property="og:title" content="notes.hvck.dev ~ my notes" />
 	<meta
 		property="og:description"
-		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
+		content="shared note"
 	/>
 	<meta property="og:image" content="https://notes.hvck.dev/meta.png" />
 
@@ -54,7 +54,7 @@
 	<meta property="twitter:title" content="notes.hvck.dev — my notes" />
 	<meta
 		property="twitter:description"
-		content="Securely share your Obsidian notes with one click. Zero configuration. End-to-end encrypted. No account needed. Completely open source! Download the QuickShare extension in the Obsidian community plugin marketplace."
+		content="shared note"
 	/>
 	<meta property="twitter:image" content="https://notes.hvck.dev/meta.png" />
 </svelte:head>

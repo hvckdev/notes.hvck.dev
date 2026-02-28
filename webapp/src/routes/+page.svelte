@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING} — Securely share your Obsidian notes with one click.</title
+	<title>{import.meta.env.VITE_BRANDING}</title
 	>
 </svelte:head>
 
