@@ -29,7 +29,7 @@
 		<div id="navbar-left" class="flex gap-4">
 			<a href="/" class="self-center h-full pb-0.5">
 				<span id="name" class="self-center font-bold text-xl md:text-lg dark:text-white"
-					>📝 {import.meta.env.VITE_BRANDING}</span
+					>{import.meta.env.VITE_BRANDING}</span
 				>
 			</a>
 			<ul class="hidden md:flex gap-4 content-center">

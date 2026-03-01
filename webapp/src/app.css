@@ -18,3 +18,7 @@
 
     --callout-color: var(--callout-note);
 }
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}

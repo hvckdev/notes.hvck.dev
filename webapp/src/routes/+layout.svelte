@@ -46,7 +46,6 @@
 		property="og:description"
 		content="shared note"
 	/>
-	<meta property="og:image" content="https://notes.hvck.dev/meta.png" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
@@ -56,12 +55,11 @@
 		property="twitter:description"
 		content="shared note"
 	/>
-	<meta property="twitter:image" content="https://notes.hvck.dev/meta.png" />
 </svelte:head>
 
 <div class=" h-full {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
-	<div class="bg-white dark:bg-background-dark min-h-full transition-colors">
-		<div class="z-50 sticky top-0 w-full bg-white dark:bg-background-dark transition-colors">
+	<div class="bg-white dark:bg-zinc-900 min-h-full transition-colors">
+		<div class="z-50 sticky top-0 w-full bg-white dark:bg-zinc-900 transition-colors">
 			<div class="top-0 left-0 right-0">
 				<NavBar>
 					<svelte:fragment slot="left" />
