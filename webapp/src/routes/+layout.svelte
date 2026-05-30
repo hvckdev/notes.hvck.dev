@@ -3,6 +3,7 @@
 
 	import Footer from '$lib/components/Footer.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 	import '../app.css';
 
 	let dark: boolean;
@@ -67,3 +68,5 @@
 		<Footer />
 	</div>
 </div>
+
+<ScrollToTop />
