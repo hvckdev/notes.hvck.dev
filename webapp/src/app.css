@@ -19,60 +19,58 @@
     --callout-color: var(--callout-note);
 
     /* Glass tokens — light mode */
-    --glass-bg: rgba(255, 255, 255, 0.55);
-    --glass-bg-strong: rgba(255, 255, 255, 0.75);
-    --glass-bg-subtle: rgba(255, 255, 255, 0.35);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --glass-shadow: rgba(31, 38, 135, 0.08);
-    --glass-blur: 16px;
-    --glass-blur-strong: 24px;
-    --glass-blur-subtle: 10px;
+    --glass-bg: rgba(236, 254, 255, 0.45);
+    --glass-bg-strong: rgba(236, 254, 255, 0.6);
+    --glass-bg-subtle: rgba(236, 254, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: rgba(31, 38, 135, 0.06);
+    --glass-blur: 20px;
+    --glass-blur-strong: 28px;
+    --glass-blur-subtle: 12px;
 
     /* Gradient — cold cosmos light */
     --gradient-1: #ecfeff;
     --gradient-2: #d1fae5;
     --gradient-3: #ede9fe;
+    --gradient-4: #fce7f3;
+    --gradient-5: #dbeafe;
+    --gradient-6: #ccfbf1;
 }
 
 .dark {
     /* Glass tokens — dark mode */
-    --glass-bg: rgba(24, 24, 27, 0.6);
-    --glass-bg-strong: rgba(24, 24, 27, 0.8);
-    --glass-bg-subtle: rgba(24, 24, 27, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
-    --glass-blur: 16px;
-    --glass-blur-strong: 24px;
-    --glass-blur-subtle: 10px;
+    --glass-bg: rgba(14, 10, 36, 0.45);
+    --glass-bg-strong: rgba(14, 10, 36, 0.6);
+    --glass-bg-subtle: rgba(14, 10, 36, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: rgba(0, 0, 0, 0.25);
+    --glass-blur: 20px;
+    --glass-blur-strong: 28px;
+    --glass-blur-subtle: 12px;
 
     /* Gradient — cold cosmos dark */
     --gradient-1: #050510;
     --gradient-2: #081420;
     --gradient-3: #0f0a1e;
+    --gradient-4: #0d0a18;
+    --gradient-5: #0a0520;
+    --gradient-6: #100a1a;
 }
 
 body {
     font-family: 'Outfit', sans-serif;
 }
 
-/* ── Animated gradient background ── */
+/* ── Mesh gradient background ── */
 .gradient-bg {
-    background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
-    background-size: 400% 400%;
-    animation: gradient-drift 60s ease infinite;
+    background:
+        radial-gradient(ellipse at 10% 20%, var(--gradient-4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 10%, var(--gradient-5) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 80%, var(--gradient-6) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 70%, var(--gradient-2) 0%, transparent 35%),
+        radial-gradient(ellipse at 20% 90%, var(--gradient-3) 0%, transparent 40%),
+        linear-gradient(160deg, var(--gradient-1) 0%, var(--gradient-2) 50%, var(--gradient-3) 100%);
     min-height: 100%;
-}
-
-@keyframes gradient-drift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 /* ── Glass utility classes ── */
