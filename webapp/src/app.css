@@ -46,13 +46,13 @@
     --glass-blur-subtle: 10px;
 
     /* Gradient — cold cosmos dark */
-    --gradient-1: #0c0a1a;
-    --gradient-2: #0d1f2d;
-    --gradient-3: #1a0d2e;
+    --gradient-1: #050510;
+    --gradient-2: #081420;
+    --gradient-3: #0f0a1e;
 }
 
 body {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 /* ── Animated gradient background ── */

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LinkIcon from 'svelte-icons/md/MdOpenInNew.svelte';
+	import { ExternalLink } from 'lucide-svelte';
 	import InternalLink from './InternalLink.svelte';
 
 	export let href = '';
@@ -16,7 +16,7 @@
 {#if isWebLink}
 	<span class="underline cursor-not-allowed inline-flex items-center font-normal">
 		<a {href} {title} class="external-link text-[#705dcf]"><slot /></a>
-		<span class="h-3 w-3 inline-block mb-2 text-zinc-400 ml-0.5"><LinkIcon /></span>
+		<ExternalLink size={12} class="text-zinc-400 ml-0.5 mb-1" />
 	</span>
 {:else}
 	<InternalLink useSlot><slot /></InternalLink>

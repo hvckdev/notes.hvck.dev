@@ -54,6 +54,7 @@
 		"highlight.js": "^11.6.0",
 		"katex": "^0.16.0",
 		"lucide-react": "^0.525.0",
+		"lucide-svelte": "^1.0.1",
 		"marked": "^4.0.17",
 		"svelte-icons": "^2.1.0",
 		"svelte-markdown": "^0.2.2",

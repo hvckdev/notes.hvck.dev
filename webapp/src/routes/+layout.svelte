@@ -3,7 +3,6 @@
 
 	import Footer from '$lib/components/Footer.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import ThemeToggle from '$lib/components/navbar/ThemeToggle.svelte';
 	import '../app.css';
 
 	let dark: boolean;
@@ -59,17 +58,7 @@
 
 <div class="min-h-screen gradient-bg {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
 	<div class="min-h-full transition-colors">
-		<div class="z-50 sticky top-0 w-full">
-			<div class="top-0 left-0 right-0">
-				<NavBar>
-					<svelte:fragment slot="left" />
-					<svelte:fragment slot="right">
-						<ThemeToggle bind:dark />
-					</svelte:fragment>
-					></NavBar
-				>
-			</div>
-		</div>
+		<NavBar bind:dark />
 
 		<div class="container mx-auto max-w-5xl mx-auto mt-8 md:mt-16 px-4 2xl:px-0 pb-12">
 			<slot />

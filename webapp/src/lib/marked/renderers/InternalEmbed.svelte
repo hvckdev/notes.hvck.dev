@@ -1,6 +1,5 @@
 <script lang="ts">
-	import EmbedIcon from 'svelte-icons/md/MdAttachment.svelte';
-	import FaRegQuestionCircle from 'svelte-icons/fa/FaRegQuestionCircle.svelte';
+	import { Paperclip, HelpCircle } from 'lucide-svelte';
 
 	export let text: string;
 </script>
@@ -10,15 +9,13 @@
 		<div
 			class="glass-subtle rounded-xl px-4 py-8 inline-flex flex-col items-center justify-center"
 		>
-			<span class="h-8 text-zinc-400 ml-0.5 inline-flex items-center whitespace-nowrap gap-1"
-				><span class="w-8 h-8 inline-block">
-					<EmbedIcon />
-				</span>
+			<span class="h-8 text-zinc-400 inline-flex items-center whitespace-nowrap gap-1.5"
+				><Paperclip size={20} class="text-zinc-400" />
 				<span>Internal embed</span>
 			</span>
 			<span class="underline cursor-not-allowed inline-flex items-center">
 				<span class="text-[#705dcf] opacity-50">{text}</span>
-				<span class="inline-block w-3 h-3 mb-2 text-zinc-400 ml-0.5"><FaRegQuestionCircle /></span>
+				<HelpCircle size={10} class="text-zinc-400 ml-0.5 mb-1" />
 			</span>
 		</div>
 	</dfn>

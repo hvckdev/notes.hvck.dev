@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FaRegQuestionCircle from 'svelte-icons/fa/FaRegQuestionCircle.svelte';
+	import { HelpCircle } from 'lucide-svelte';
 
 	export let text: string = '';
 	export let displayText: string = '';
@@ -27,6 +27,6 @@
 				{displayText}
 			{/if}
 		</span>
-		<span class="w-3 h-3 inline-block mb-2 text-zinc-400 ml-0.5"><FaRegQuestionCircle /></span>
+		<HelpCircle size={10} class="text-zinc-400 ml-0.5 mb-1" />
 	</span>
 </dfn>

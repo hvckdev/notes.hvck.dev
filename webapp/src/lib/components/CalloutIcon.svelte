@@ -1,46 +1,35 @@
 <script lang="ts">
-	import NoteIcon from 'svelte-icons/md/MdCreate.svelte';
-	import SummaryIcon from 'svelte-icons/md/MdFormatListBulleted.svelte';
-	import InfoIcon from 'svelte-icons/md/MdInfoOutline.svelte';
-	import TodoIcon from 'svelte-icons/md/MdPlaylistAddCheck.svelte';
-	// import HintIcon from 'svelte-icons/md/MdLightbulbOutline.svelte';
-	import HintIcon from 'svelte-icons/md/MdWhatshot.svelte';
-	import CheckIcon from 'svelte-icons/md/MdCheck.svelte';
-	import QuestionIcon from 'svelte-icons/md/MdHelpOutline.svelte';
-	import WarningIcon from 'svelte-icons/md/MdWarning.svelte';
-	import FailIcon from 'svelte-icons/md/MdClose.svelte';
-	import ErrorIcon from 'svelte-icons/md/MdErrorOutline.svelte';
-	import BugIcon from 'svelte-icons/md/MdBugReport.svelte';
-	import QuoteIcon from 'svelte-icons/md/MdFormatQuote.svelte';
+	import { Pencil, List, Info, ListChecks, Flame, Check, HelpCircle, AlertTriangle, X, AlertOctagon, Bug, Quote } from 'lucide-svelte';
 	export let icon: string;
+	export let size = 20;
 </script>
 
 {#if icon == 'note'}
-	<NoteIcon />
+	<Pencil {size} />
 {:else if icon == 'summary'}
-	<SummaryIcon />
+	<List {size} />
 {:else if icon == 'info'}
-	<InfoIcon />
+	<Info {size} />
 {:else if icon == 'todo'}
-	<TodoIcon />
+	<ListChecks {size} />
 {:else if icon == 'hint'}
-	<HintIcon />
+	<Flame {size} />
 {:else if icon == 'success'}
-	<CheckIcon />
+	<Check {size} />
 {:else if icon == 'question'}
-	<QuestionIcon />
+	<HelpCircle {size} />
 {:else if icon == 'warning'}
-	<WarningIcon />
+	<AlertTriangle {size} />
 {:else if icon == 'fail'}
-	<FailIcon />
+	<X {size} />
 {:else if icon == 'error'}
-	<ErrorIcon />
+	<AlertOctagon {size} />
 {:else if icon == 'bug'}
-	<BugIcon />
+	<Bug {size} />
 {:else if icon == 'example'}
-	<SummaryIcon />
+	<List {size} />
 {:else if icon == 'quote'}
-	<QuoteIcon />
+	<Quote {size} />
 {:else}
-	<NoteIcon />
+	<Pencil {size} />
 {/if}

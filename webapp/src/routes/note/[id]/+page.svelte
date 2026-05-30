@@ -2,11 +2,9 @@
 	import { onMount } from 'svelte';
 	import { decrypt } from '$lib/crypto/decrypt';
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
-	import LogoMarkdown from 'svelte-icons/io/IoLogoMarkdown.svelte';
-	import IconEncrypted from 'svelte-icons/md/MdLockOutline.svelte';
+	import { FileText, Lock, FileCode } from 'lucide-svelte';
 	import { browser } from '$app/environment';
 	import RawRenderer from '$lib/components/RawRenderer.svelte';
-	import LogoDocument from 'svelte-icons/md/MdUndo.svelte';
 	import Dismissable from '$lib/components/Dismissable.svelte';
 	import type { PageData } from './$types';
 
@@ -83,7 +81,7 @@
 			class="mb-6 text-sm flex gap-3 flex-col md:gap-0 md:flex-row justify-between items-start md:items-center glass-subtle rounded-2xl px-4 py-3 text-zinc-600 dark:text-zinc-300"
 		>
 			<span class="flex gap-1.5 items-center uppercase">
-				<span class="inline-block w-5 h-5"><IconEncrypted /></span>
+				<Lock size={14} />
 				<span>e2e encrypted | <span>Shared {timeString} ago</span></span>
 			</span>
 			<button
@@ -91,11 +89,11 @@
 				class="flex flex-row-reverse justify-end md:flex-row gap-1.5 uppercase items-center hover:underline min-h-[44px]"
 			>
 				{#if showRaw}
-					<span class="w-6 h-6 inline-block"><LogoDocument /> </span>
+					<FileText size={16} />
 					<span>Render Document</span>
 				{:else}
 					<span>Raw Markdown</span>
-					<span class="w-6 h-6 inline-block"><LogoMarkdown /> </span>
+					<FileCode size={16} />
 				{/if}
 			</button>
 		</div>
