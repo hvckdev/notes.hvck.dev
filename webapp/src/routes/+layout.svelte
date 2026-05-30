@@ -31,7 +31,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING}.</title>
+	<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'}</title>
 	<meta name="title" content="notes.hvck.space - my notes" />
 	<meta
 		name="description"
@@ -57,9 +57,9 @@
 	/>
 </svelte:head>
 
-<div class=" h-full {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
-	<div class="bg-white dark:bg-zinc-900 min-h-full transition-colors">
-		<div class="z-50 sticky top-0 w-full bg-white dark:bg-zinc-900 transition-colors">
+<div class="min-h-screen gradient-bg {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
+	<div class="min-h-full transition-colors">
+		<div class="z-50 sticky top-0 w-full">
 			<div class="top-0 left-0 right-0">
 				<NavBar>
 					<svelte:fragment slot="left" />
@@ -71,9 +71,9 @@
 			</div>
 		</div>
 
-		<div class="container mx-auto max-w-4xl mx-auto mt-6 md:mt-12 px-4 2xl:px-0 ">
+		<div class="container mx-auto max-w-5xl mx-auto mt-8 md:mt-16 px-4 2xl:px-0 pb-12">
 			<slot />
-			<div class="mt-12">
+			<div class="mt-16">
 				<Footer />
 			</div>
 		</div>

@@ -20,7 +20,7 @@
 
 <div
 	id="navbar"
-	class="h-[65px] md:h-14 border-b border-zinc-200 dark:border-zinc-700 transition-colors"
+	class="h-[65px] md:h-14 glass-strong transition-colors"
 >
 	<div
 		id="navbar-content"
@@ -29,7 +29,7 @@
 		<div id="navbar-left" class="flex gap-4">
 			<a href="/" class="self-center h-full pb-0.5">
 				<span id="name" class="self-center font-bold text-xl md:text-lg dark:text-white"
-					>{import.meta.env.VITE_BRANDING}</span
+					>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'}</span
 				>
 			</a>
 			<ul class="hidden md:flex gap-4 content-center">
@@ -41,11 +41,12 @@
 				<slot name="right" />
 			</ul>
 		</div>
-		<div class="md:hidden ml-6 cursor-pointer text-text-muted hover:text-text-normal w-6">
+		<div class="md:hidden ml-6 cursor-pointer w-6">
 			<button
 				aria-label="navigation menu"
 				on:click={() => (showMobileMenu = !showMobileMenu)}
-				class="flex flex-col justify-center text-zinc-500 dark:text-zinc-400"><FaBars /></button
+				class="flex flex-col justify-center min-h-[44px] min-w-[44px] text-zinc-600 dark:text-zinc-300"
+			><FaBars /></button
 			>
 		</div>
 	</div>
@@ -54,11 +55,10 @@
 {#if showMobileMenu}
 	<div
 		transition:slide
-		class="fixed top-[65px] w-full sm:w-72 sm:right-1
-		rounded-lg"
+		class="fixed top-[65px] w-full sm:w-72 sm:right-1"
 	>
 		<div
-			class="bg-zinc-200 dark:bg-zinc-700 relative mt-2 mx-2 px-4 py-2 rounded-[20px] shadow-md sm:shadow-lg"
+			class="glass-strong relative mt-2 mx-2 px-4 py-2 rounded-2xl"
 		>
 			<div
 				on:click={() => (showMobileMenu = !showMobileMenu)}

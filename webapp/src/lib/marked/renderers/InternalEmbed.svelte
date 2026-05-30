@@ -8,7 +8,7 @@
 <div>
 	<dfn class="not-italic" title="Interal embeds are not shared currently.">
 		<div
-			class="px-4 py-12 border border-zinc-300 dark:border-zinc-600 inline-flex flex-col items-center justify-center"
+			class="glass-subtle rounded-xl px-4 py-8 inline-flex flex-col items-center justify-center"
 		>
 			<span class="h-8 text-zinc-400 ml-0.5 inline-flex items-center whitespace-nowrap gap-1"
 				><span class="w-8 h-8 inline-block">

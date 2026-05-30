@@ -12,7 +12,7 @@
 	</Callout>
 {:else}
 	<p
-		class="border border-l-4 ml-4 prose-p:my-2 prose-p:mx-4 dark:border-zinc-600 transition-colors"
+		class="glass-subtle rounded-xl ml-4 px-4 py-2 prose-p:my-2 prose-p:mx-2 border-l-4 border-zinc-300 dark:border-zinc-500"
 	>
 		<slot />
 	</p>

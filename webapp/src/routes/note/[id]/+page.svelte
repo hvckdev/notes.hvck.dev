@@ -69,9 +69,9 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING} | Shared note</title>
+	<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'} | Shared note</title>
 	{#if decryptFailed}
-		<title>{import.meta.env.VITE_BRANDING} | Error decrypting note</title>
+		<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'} | Error decrypting note</title>
 	{/if}
 </svelte:head>
 
@@ -79,8 +79,8 @@
 	<div class="max-w-2xl mx-auto">
 		<Dismissable />
 
-		<p
-			class="mb-4 text-sm flex gap-2 flex-col md:gap-0 md:flex-row justify-between text-zinc-500 dark:text-zinc-400"
+		<div
+			class="mb-6 text-sm flex gap-3 flex-col md:gap-0 md:flex-row justify-between items-start md:items-center glass-subtle rounded-2xl px-4 py-3 text-zinc-600 dark:text-zinc-300"
 		>
 			<span class="flex gap-1.5 items-center uppercase">
 				<span class="inline-block w-5 h-5"><IconEncrypted /></span>
@@ -88,7 +88,7 @@
 			</span>
 			<button
 				on:click={toggleRaw}
-				class="flex flex-row-reverse justify-end md:flex-row underline md:no-underline gap-1.5 uppercase items-center hover:underline"
+				class="flex flex-row-reverse justify-end md:flex-row gap-1.5 uppercase items-center hover:underline min-h-[44px]"
 			>
 				{#if showRaw}
 					<span class="w-6 h-6 inline-block"><LogoDocument /> </span>
@@ -98,17 +98,20 @@
 					<span class="w-6 h-6 inline-block"><LogoMarkdown /> </span>
 				{/if}
 			</button>
-		</p>
-		{#if showRaw}
-			<RawRenderer>{plaintext}</RawRenderer>
-		{:else}
-			<MarkdownRenderer {plaintext} {fileTitle} />
-		{/if}
+		</div>
+
+		<div class="glass rounded-2xl px-4 py-6 md:px-8 md:py-8">
+			{#if showRaw}
+				<RawRenderer>{plaintext}</RawRenderer>
+			{:else}
+				<MarkdownRenderer {plaintext} {fileTitle} />
+			{/if}
+		</div>
 	</div>
 {/if}
 
 {#if decryptFailed}
-	<div class="prose max-w-2xl prose-zinc dark:prose-invert">
+	<div class="prose max-w-2xl prose-zinc dark:prose-invert glass rounded-2xl px-6 py-8 md:px-10 md:py-10">
 		<h1>Error: Cannot decrypt file 🔒</h1>
 		<p class="prose-xl">This note could not be decrypted with this link.</p>
 		<p class="prose-xl">

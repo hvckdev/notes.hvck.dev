@@ -37,7 +37,7 @@
 
 <div
 	style="--callout-color: var({color})"
-	class="border-l-4 border-l-callout bg-zinc-100 dark:bg-zinc-800 my-4"
+	class="border-l-4 border-l-callout glass-subtle rounded-xl my-4 overflow-hidden"
 >
 	<div class="p-[10px] bg-callout-bg flex items-center gap-2">
 		<span class="callout-icon font-bold text-md text-callout h-5 w-5 inline-block"

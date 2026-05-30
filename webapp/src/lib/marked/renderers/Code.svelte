@@ -22,6 +22,6 @@
 	});
 </script>
 
-<div class="">
+<div class="rounded-xl overflow-hidden my-4">
 	<pre class="language-{lang}"><code>{@html highlighted}</code></pre>
 </div>

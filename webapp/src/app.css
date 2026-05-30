@@ -17,8 +17,90 @@
     --callout-quote: 158, 158, 158;
 
     --callout-color: var(--callout-note);
+
+    /* Glass tokens — light mode */
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-bg-strong: rgba(255, 255, 255, 0.75);
+    --glass-bg-subtle: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: rgba(31, 38, 135, 0.08);
+    --glass-blur: 16px;
+    --glass-blur-strong: 24px;
+    --glass-blur-subtle: 10px;
+
+    /* Gradient — cold cosmos light */
+    --gradient-1: #ecfeff;
+    --gradient-2: #d1fae5;
+    --gradient-3: #ede9fe;
+}
+
+.dark {
+    /* Glass tokens — dark mode */
+    --glass-bg: rgba(24, 24, 27, 0.6);
+    --glass-bg-strong: rgba(24, 24, 27, 0.8);
+    --glass-bg-subtle: rgba(24, 24, 27, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --glass-blur: 16px;
+    --glass-blur-strong: 24px;
+    --glass-blur-subtle: 10px;
+
+    /* Gradient — cold cosmos dark */
+    --gradient-1: #0c0a1a;
+    --gradient-2: #0d1f2d;
+    --gradient-3: #1a0d2e;
 }
 
 body {
     font-family: 'Nunito Sans', sans-serif;
+}
+
+/* ── Animated gradient background ── */
+.gradient-bg {
+    background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+    background-size: 400% 400%;
+    animation: gradient-drift 60s ease infinite;
+    min-height: 100%;
+}
+
+@keyframes gradient-drift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ── Glass utility classes ── */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 20px var(--glass-shadow);
+}
+
+.glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--glass-blur-strong));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 24px var(--glass-shadow);
+}
+
+.glass-subtle {
+    background: var(--glass-bg-subtle);
+    backdrop-filter: blur(var(--glass-blur-subtle));
+    -webkit-backdrop-filter: blur(var(--glass-blur-subtle));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 2px 12px var(--glass-shadow);
+}
+
+/* ── Smooth theme transition ── */
+html {
+    transition: background 0.4s ease;
 }
