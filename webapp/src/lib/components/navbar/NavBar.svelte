@@ -16,7 +16,7 @@
 		>
 			<a href="/" class="self-center">
 				<span id="name" class="self-center font-semibold text-lg dark:text-white"
-					>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'}</span
+					>hvck <span class="text-zinc-400 dark:text-zinc-500 font-normal">/ notes</span></span
 				>
 			</a>
 

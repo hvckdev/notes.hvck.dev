@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'}</title
+	<title>hvck / notes</title
 	>
 </svelte:head>
 

@@ -67,9 +67,9 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'} | Shared note</title>
+	<title>hvck / notes | Shared note</title>
 	{#if decryptFailed}
-		<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'} | Error decrypting note</title>
+		<title>hvck / notes | Error decrypting note</title>
 	{/if}
 </svelte:head>
 

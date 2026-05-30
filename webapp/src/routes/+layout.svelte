@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_BRANDING || 'notes.hvck.dev'}</title>
+	<title>hvck / notes</title>
 	<meta name="title" content="notes.hvck.space - my notes" />
 	<meta
 		name="description"
