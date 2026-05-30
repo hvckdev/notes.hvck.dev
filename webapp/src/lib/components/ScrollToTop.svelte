@@ -28,7 +28,7 @@
 {#if visible}
 	<button
 		on:click={scrollToTop}
-		class="fixed left-3 md:left-6 bottom-6 z-40 w-10 h-10 rounded-full glass-subtle
+		class="fixed right-3 md:right-6 bottom-6 z-40 w-10 h-10 rounded-full glass
 		flex items-center justify-center text-zinc-600 dark:text-zinc-300
 		hover:bg-white/40 dark:hover:bg-white/10 transition-all"
 		aria-label="Scroll to top"
