@@ -56,15 +56,14 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen gradient-bg {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
-	<div class="min-h-full transition-colors">
-		<NavBar bind:dark />
+<div class="min-h-screen gradient-bg flex flex-col {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
+	<NavBar bind:dark />
 
-		<div class="container mx-auto max-w-5xl mx-auto mt-8 md:mt-16 px-4 2xl:px-0 pb-12">
-			<slot />
-			<div class="mt-16">
-				<Footer />
-			</div>
-		</div>
+	<div class="flex-1 container mx-auto max-w-5xl mt-6 md:mt-12 px-4 2xl:px-0">
+		<slot />
+	</div>
+
+	<div class="container mx-auto max-w-5xl px-4 2xl:px-0 pb-6 pt-8">
+		<Footer />
 	</div>
 </div>

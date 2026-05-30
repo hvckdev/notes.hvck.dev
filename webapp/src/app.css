@@ -59,6 +59,13 @@
 
 body {
     font-family: 'Outfit', sans-serif;
+    background: linear-gradient(160deg, #ecfeff, #d1fae5, #ede9fe);
+    min-height: 100%;
+}
+
+.dark body,
+.dark {
+    background: linear-gradient(160deg, #050510, #081420, #0f0a1e);
 }
 
 /* ── Mesh gradient background ── */
