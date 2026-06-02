@@ -38,3 +38,24 @@ export class NoteDeleteRequest extends NoteRequestBody {
   @IsNotEmpty()
   secret_token: string | undefined;
 }
+
+export class NoteUpdateRequest extends NoteRequestBody {
+  @IsBase64()
+  @IsNotEmpty()
+  ciphertext: string | undefined;
+
+  @IsBase64()
+  @ValidateIf((o) => !o.iv)
+  hmac?: string | undefined;
+
+  @IsBase64()
+  @ValidateIf((o) => !o.hmac)
+  iv?: string | undefined;
+
+  @Matches("^v[0-9]+$")
+  crypto_version: string = "v1";
+
+  @IsBase64()
+  @IsNotEmpty()
+  secret_token: string | undefined;
+}

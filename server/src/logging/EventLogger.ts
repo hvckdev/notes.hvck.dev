@@ -30,7 +30,7 @@ export interface WriteEvent extends ClientEvent {
 
 interface DeleteEvent extends ClientEvent { }
 
-interface UpdateEvent extends ClientEvent { }
+export interface UpdateEvent extends ClientEvent { }
 
 interface ReadEvent extends ClientEvent { }
 
