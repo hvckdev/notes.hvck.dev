@@ -3,7 +3,6 @@ import rateLimit from "express-rate-limit";
 import { deleteNoteController } from "./note.delete.controller";
 import { getNoteController } from "./note.get.controller";
 import { postNoteController } from "./note.post.controller";
-import { putNoteController } from "./note.put.controller";
 
 export const notesRoute = express.Router();
 
@@ -27,5 +26,4 @@ const getRateLimit = rateLimit({
 notesRoute.use(jsonParser);
 notesRoute.post("", postRateLimit, postNoteController);
 notesRoute.get("/:id", getRateLimit, getNoteController);
-notesRoute.put("/:id", postRateLimit, putNoteController);
 notesRoute.delete("/:id", getRateLimit, deleteNoteController);
