@@ -3,7 +3,7 @@
 ## Internal links with [[brackets]]
 
 - [[Normal internal link]]
-- [[Aliased internal link|Link with alias]] 
+- [[Aliased internal link|Link with alias]]
 - [[Page with headings#heading A]] (link to heading)
 - [[Page with headings#heading A|Link with heading alias]] (link to heading with alias)
 - [[Home (fake)#Home|Link with heading alias#false heading]] (link to heading with alias with heading)

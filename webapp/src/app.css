@@ -3,109 +3,109 @@
 @tailwind utilities;
 
 :root {
-    --callout-note: 68, 138, 255;
-    --callout-summary: 0, 176, 255;
-    --callout-info: 0, 184, 212;
-    --callout-hint: 0, 191, 165;
-    --callout-success: 0, 200, 83;
-    --callout-question: 100, 221, 23;
-    --callout-warning: 255, 145, 0;
-    --callout-fail: 255, 82, 82;
-    --callout-error: 255, 23, 68;
-    --callout-bug: 255, 23, 68;
-    --callout-example: 124, 77, 255;
-    --callout-quote: 158, 158, 158;
+	--callout-note: 68, 138, 255;
+	--callout-summary: 0, 176, 255;
+	--callout-info: 0, 184, 212;
+	--callout-hint: 0, 191, 165;
+	--callout-success: 0, 200, 83;
+	--callout-question: 100, 221, 23;
+	--callout-warning: 255, 145, 0;
+	--callout-fail: 255, 82, 82;
+	--callout-error: 255, 23, 68;
+	--callout-bug: 255, 23, 68;
+	--callout-example: 124, 77, 255;
+	--callout-quote: 158, 158, 158;
 
-    --callout-color: var(--callout-note);
+	--callout-color: var(--callout-note);
 
-    /* Glass tokens — light mode */
-    --glass-bg: rgba(236, 254, 255, 0.45);
-    --glass-bg-strong: rgba(236, 254, 255, 0.6);
-    --glass-bg-subtle: rgba(236, 254, 255, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: rgba(31, 38, 135, 0.06);
-    --glass-blur: 20px;
-    --glass-blur-strong: 28px;
-    --glass-blur-subtle: 12px;
+	/* Glass tokens — light mode */
+	--glass-bg: rgba(236, 254, 255, 0.45);
+	--glass-bg-strong: rgba(236, 254, 255, 0.6);
+	--glass-bg-subtle: rgba(236, 254, 255, 0.25);
+	--glass-border: rgba(255, 255, 255, 0.5);
+	--glass-shadow: rgba(31, 38, 135, 0.06);
+	--glass-blur: 20px;
+	--glass-blur-strong: 28px;
+	--glass-blur-subtle: 12px;
 
-    /* Gradient — cold cosmos light */
-    --gradient-1: #ecfeff;
-    --gradient-2: #d1fae5;
-    --gradient-3: #ede9fe;
-    --gradient-4: #fce7f3;
-    --gradient-5: #dbeafe;
-    --gradient-6: #ccfbf1;
+	/* Gradient — cold cosmos light */
+	--gradient-1: #ecfeff;
+	--gradient-2: #d1fae5;
+	--gradient-3: #ede9fe;
+	--gradient-4: #fce7f3;
+	--gradient-5: #dbeafe;
+	--gradient-6: #ccfbf1;
 }
 
 .dark {
-    /* Glass tokens — dark mode */
-    --glass-bg: rgba(14, 10, 36, 0.45);
-    --glass-bg-strong: rgba(14, 10, 36, 0.6);
-    --glass-bg-subtle: rgba(14, 10, 36, 0.25);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: rgba(0, 0, 0, 0.25);
-    --glass-blur: 20px;
-    --glass-blur-strong: 28px;
-    --glass-blur-subtle: 12px;
+	/* Glass tokens — dark mode */
+	--glass-bg: rgba(14, 10, 36, 0.45);
+	--glass-bg-strong: rgba(14, 10, 36, 0.6);
+	--glass-bg-subtle: rgba(14, 10, 36, 0.25);
+	--glass-border: rgba(255, 255, 255, 0.08);
+	--glass-shadow: rgba(0, 0, 0, 0.25);
+	--glass-blur: 20px;
+	--glass-blur-strong: 28px;
+	--glass-blur-subtle: 12px;
 
-    /* Gradient — cold cosmos dark */
-    --gradient-1: #050510;
-    --gradient-2: #081420;
-    --gradient-3: #0f0a1e;
-    --gradient-4: #0d0a18;
-    --gradient-5: #0a0520;
-    --gradient-6: #100a1a;
+	/* Gradient — cold cosmos dark */
+	--gradient-1: #050510;
+	--gradient-2: #081420;
+	--gradient-3: #0f0a1e;
+	--gradient-4: #0d0a18;
+	--gradient-5: #0a0520;
+	--gradient-6: #100a1a;
 }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    background: linear-gradient(160deg, #ecfeff, #d1fae5, #ede9fe);
-    min-height: 100%;
+	font-family: 'Jost', sans-serif;
+	background: linear-gradient(160deg, #ecfeff, #d1fae5, #ede9fe);
+	min-height: 100%;
 }
 
 .dark body,
 .dark {
-    background: linear-gradient(160deg, #050510, #081420, #0f0a1e);
+	background: linear-gradient(160deg, #050510, #081420, #0f0a1e);
 }
 
 /* ── Mesh gradient background ── */
 .gradient-bg {
-    background:
-        radial-gradient(ellipse at 10% 20%, var(--gradient-4) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 10%, var(--gradient-5) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 80%, var(--gradient-6) 0%, transparent 45%),
-        radial-gradient(ellipse at 90% 70%, var(--gradient-2) 0%, transparent 35%),
-        radial-gradient(ellipse at 20% 90%, var(--gradient-3) 0%, transparent 40%),
-        linear-gradient(160deg, var(--gradient-1) 0%, var(--gradient-2) 50%, var(--gradient-3) 100%);
-    min-height: 100%;
+	background:
+		radial-gradient(ellipse at 10% 20%, var(--gradient-4) 0%, transparent 50%),
+		radial-gradient(ellipse at 80% 10%, var(--gradient-5) 0%, transparent 40%),
+		radial-gradient(ellipse at 50% 80%, var(--gradient-6) 0%, transparent 45%),
+		radial-gradient(ellipse at 90% 70%, var(--gradient-2) 0%, transparent 35%),
+		radial-gradient(ellipse at 20% 90%, var(--gradient-3) 0%, transparent 40%),
+		linear-gradient(160deg, var(--gradient-1) 0%, var(--gradient-2) 50%, var(--gradient-3) 100%);
+	min-height: 100%;
 }
 
 /* ── Glass utility classes ── */
 .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 20px var(--glass-shadow);
+	background: var(--glass-bg);
+	backdrop-filter: blur(var(--glass-blur));
+	-webkit-backdrop-filter: blur(var(--glass-blur));
+	border: 1px solid var(--glass-border);
+	box-shadow: 0 4px 20px var(--glass-shadow);
 }
 
 .glass-strong {
-    background: var(--glass-bg-strong);
-    backdrop-filter: blur(var(--glass-blur-strong));
-    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 24px var(--glass-shadow);
+	background: var(--glass-bg-strong);
+	backdrop-filter: blur(var(--glass-blur-strong));
+	-webkit-backdrop-filter: blur(var(--glass-blur-strong));
+	border: 1px solid var(--glass-border);
+	box-shadow: 0 4px 24px var(--glass-shadow);
 }
 
 .glass-subtle {
-    background: var(--glass-bg-subtle);
-    backdrop-filter: blur(var(--glass-blur-subtle));
-    -webkit-backdrop-filter: blur(var(--glass-blur-subtle));
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 2px 12px var(--glass-shadow);
+	background: var(--glass-bg-subtle);
+	backdrop-filter: blur(var(--glass-blur-subtle));
+	-webkit-backdrop-filter: blur(var(--glass-blur-subtle));
+	border: 1px solid var(--glass-border);
+	box-shadow: 0 2px 12px var(--glass-shadow);
 }
 
 /* ── Smooth theme transition ── */
 html {
-    transition: background 0.4s ease;
+	transition: background 0.4s ease;
 }

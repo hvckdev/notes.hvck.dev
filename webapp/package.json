@@ -17,7 +17,6 @@
 		"coverage": "vitest run --coverage"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "^1.0.0-next.544",
 		"@tailwindcss/typography": "^0.5.2",
 		"@testing-library/jest-dom": "^5.16.4",
@@ -50,9 +49,9 @@
 		"@sveltejs/adapter-node": "^1.0.0-next.100",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"crypto-js": "^4.1.1",
+		"crypto-js": "^4.2.0",
 		"highlight.js": "^11.6.0",
-		"katex": "^0.16.0",
+		"katex": "^0.16.47",
 		"lucide-react": "^0.525.0",
 		"lucide-svelte": "^1.0.1",
 		"marked": "^4.0.17",
