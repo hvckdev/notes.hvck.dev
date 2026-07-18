@@ -105,6 +105,25 @@ body {
 	box-shadow: 0 2px 12px var(--glass-shadow);
 }
 
+/* ── Markdown tables ── */
+.table-scroll {
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+.table-scroll table {
+	min-width: max-content;
+}
+
+.table-scroll th,
+.table-scroll td {
+	max-width: 18rem;
+	overflow-wrap: anywhere;
+	word-break: normal;
+}
+
 /* ── Smooth theme transition ── */
 html {
 	transition: background 0.4s ease;

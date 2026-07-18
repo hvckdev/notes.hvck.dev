@@ -32,6 +32,7 @@
 
 	function onParsed() {
 		!fileTitle && setTitle();
+		wrapTables();
 		parseFootnotes();
 	}
 
@@ -51,6 +52,17 @@
 				break;
 			}
 		}
+	}
+
+	function wrapTables() {
+		const tables = Array.from(ref.querySelectorAll('table:not([data-scroll-wrapped])'));
+		tables.forEach((table) => {
+			const wrapper = document.createElement('div');
+			wrapper.className = 'table-scroll';
+			table.setAttribute('data-scroll-wrapped', 'true');
+			table.parentNode?.insertBefore(wrapper, table);
+			wrapper.appendChild(table);
+		});
 	}
 
 	/*
