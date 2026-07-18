@@ -1,32 +1,26 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	import Footer from '$lib/components/Footer.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 	import '../app.css';
 
-	let dark: boolean;
+	let dark = false;
+	let mounted = false;
 	let darkTheme = 'dark';
 
-	$: getTheme();
+	onMount(() => {
+		const savedMode = window.localStorage.getItem('isDarkMode');
+		dark = savedMode !== null
+			? savedMode === 'true'
+			: window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+		mounted = true;
+	});
 
-	$: {
-		if (browser) {
-			window.localStorage.setItem('isDarkMode', String(dark));
-		}
-	}
-
-	async function getTheme() {
-		if (browser) {
-			const savedMode = window.localStorage.getItem('isDarkMode');
-			dark = savedMode
-				? savedMode === 'true'
-				: savedMode === 'false'
-				? false
-				: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-			window.localStorage.setItem('isDarkMode', String(dark));
-		}
+	$: if (browser && mounted) {
+		window.localStorage.setItem('isDarkMode', String(dark));
 	}
 </script>
 
@@ -57,7 +51,7 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen gradient-bg flex flex-col {dark !== undefined ? '' : 'hidden'} {dark ? darkTheme : ''}">
+<div class="min-h-screen gradient-bg flex flex-col {dark ? darkTheme : ''}">
 	<NavBar bind:dark />
 
 	<div class="flex-1 container mx-auto max-w-5xl mt-6 md:mt-12 px-4 2xl:px-0">
