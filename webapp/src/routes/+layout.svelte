@@ -9,7 +9,6 @@
 
 	let dark = false;
 	let mounted = false;
-	let darkTheme = 'dark';
 
 	onMount(() => {
 		const savedMode = window.localStorage.getItem('isDarkMode');
@@ -21,6 +20,7 @@
 
 	$: if (browser && mounted) {
 		window.localStorage.setItem('isDarkMode', String(dark));
+		document.documentElement.classList.toggle('dark', dark);
 	}
 </script>
 
@@ -51,7 +51,7 @@
 	/>
 </svelte:head>
 
-<div class="min-h-screen gradient-bg flex flex-col {dark ? darkTheme : ''}">
+<div class:dark class="min-h-screen gradient-bg flex flex-col">
 	<NavBar bind:dark />
 
 	<div class="flex-1 container mx-auto max-w-5xl mt-6 md:mt-12 px-4 2xl:px-0">

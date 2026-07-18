@@ -11,8 +11,9 @@
 	export let data: PageData;
 	let { note } = data;
 
-	let plaintext: string;
+	let plaintext: string | undefined;
 	let timeString: string;
+	let decrypting = true;
 	let decryptFailed = false;
 	let showRaw = false;
 	let fileTitle: string | undefined;
@@ -41,8 +42,11 @@
 	function parsePayload(payload: string): { body: string; title?: string } {
 		try {
 			const parsed = JSON.parse(payload);
-			return { body: parsed?.body, title: parsed?.title };
-		} catch (e) {
+			if (parsed && typeof parsed === 'object' && typeof parsed.body === 'string') {
+				return { body: parsed.body, title: typeof parsed.title === 'string' ? parsed.title : undefined };
+			}
+			return { body: payload, title: undefined };
+		} catch {
 			return { body: payload, title: undefined };
 		}
 	}
@@ -56,7 +60,10 @@
 					plaintext = body;
 					fileTitle = title;
 				})
-				.catch(() => (decryptFailed = true));
+				.catch(() => (decryptFailed = true))
+				.finally(() => (decrypting = false));
+		} else {
+			decrypting = false;
 		}
 	});
 
@@ -73,7 +80,11 @@
 	{/if}
 </svelte:head>
 
-{#if plaintext}
+{#if decrypting}
+	<div class="prose prose-zinc dark:prose-invert glass rounded-2xl px-6 py-8 md:px-10 md:py-10">
+		<p class="prose-xl">Decrypting note…</p>
+	</div>
+{:else if plaintext}
 	<div class="mx-3 md:mx-6">
 		<Dismissable />
 
