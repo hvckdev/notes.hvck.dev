@@ -34,6 +34,7 @@ describe("deleteExpiredNotes", () => {
         expire_time: new Date(),
         crypto_version: "v1",
         secret_token: "secret_token",
+        secret_token_hash: null,
       },
     ]);
     mockedDao.deleteNotes.mockResolvedValue(1);

@@ -6,7 +6,6 @@ export enum EventType {
   WRITE = "WRITE",
   READ = "READ",
   DELETE = "DELETE",
-  UPDATE = "UPDATE",
   PURGE = "PURGE",
 }
 
@@ -29,8 +28,6 @@ export interface WriteEvent extends ClientEvent {
 }
 
 interface DeleteEvent extends ClientEvent { }
-
-export interface UpdateEvent extends ClientEvent { }
 
 interface ReadEvent extends ClientEvent { }
 
@@ -64,13 +61,6 @@ export default class EventLogger {
     this.printError(event);
     return prisma.event.create({
       data: { type: EventType.DELETE, ...event },
-    });
-  }
-
-  public static updateEvent(event: UpdateEvent): Promise<event> {
-    this.printError(event);
-    return prisma.event.create({
-      data: { type: EventType.UPDATE, ...event },
     });
   }
 

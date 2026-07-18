@@ -4,7 +4,7 @@ import { createNote } from "../../db/note.dao";
 import { addDays, getConnectingIp, getNoteSize } from "../../util";
 import EventLogger, { WriteEvent } from "../../logging/EventLogger";
 import { validateOrReject, ValidationError } from "class-validator";
-import { generateToken } from "../../crypto/GenerateToken";
+import { generateToken, hashToken } from "../../crypto/GenerateToken";
 import { NotePostRequest } from "../../validation/Request";
 import checkId from "../../lib/checkUserId";
 
@@ -56,7 +56,7 @@ export async function postNoteController(
     iv: notePostRequest.iv as string,
     expire_time: addDays(new Date(), EXPIRE_WINDOW_DAYS),
     crypto_version: notePostRequest.crypto_version,
-    secret_token: secret_token,
+    secret_token_hash: hashToken(secret_token),
   } as EncryptedNote;
 
   // Store note object
@@ -70,7 +70,7 @@ export async function postNoteController(
       res.json({
         view_url: `${process.env.FRONTEND_URL}/note/${savedNote.id}`,
         expire_time: savedNote.expire_time,
-        secret_token: savedNote.secret_token,
+        secret_token,
         note_id: savedNote.id,
       });
     })

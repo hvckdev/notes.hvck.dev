@@ -19,7 +19,7 @@
 	import Footnote from '$lib/marked/renderers/Footnote.svelte';
 
 	export let plaintext: string;
-	export let fileTitle: string | undefined;
+	export let fileTitle: string | undefined = undefined;
 
 	let ref: HTMLDivElement;
 	let footnotes: HTMLDivElement[];

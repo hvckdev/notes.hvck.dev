@@ -29,16 +29,6 @@ export async function deleteNote(noteId: string): Promise<EncryptedNote> {
   });
 }
 
-export async function updateNote(
-  noteId: string,
-  data: Partial<Pick<EncryptedNote, "ciphertext" | "hmac" | "iv" | "crypto_version">>
-): Promise<EncryptedNote> {
-  return prisma.encryptedNote.update({
-    where: { id: noteId },
-    data,
-  });
-}
-
 export async function deleteNotes(noteIds: string[]): Promise<number> {
   return prisma.encryptedNote
     .deleteMany({

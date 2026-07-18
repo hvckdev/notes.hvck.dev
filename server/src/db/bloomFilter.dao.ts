@@ -16,11 +16,14 @@ export async function getFilter<T extends BaseFilter>(
   name: string,
   cls: IDeserializedFilter,
 ): Promise<T> {
-  const bloomFilter = await prisma.bloomFilter.findUniqueOrThrow({
+  const bloomFilter = await prisma.bloomFilter.findUnique({
     where: {
       name: name,
     },
   });
+  if (!bloomFilter) {
+    throw new Error("No BloomFilter found");
+  }
   const serializedFilter = bloomFilter.serializedFilter;
   return deserializeFilter<T>(serializedFilter, cls);
 }

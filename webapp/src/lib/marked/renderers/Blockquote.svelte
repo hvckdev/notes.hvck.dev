@@ -3,11 +3,14 @@
 
 	export let raw: string;
 
-	let isCallout: boolean = raw.split('\n')[0].match(/>\s?\[!(.+)\]([+-]?)(\s.*|$)/) != null;
+	const calloutMatch = raw.split('\n')[0].match(/^>\s?\[!(.+?)\]([+-]?)(?:\s(.*))?$/);
+	let isCallout: boolean = calloutMatch != null;
+	let type = calloutMatch?.[1]?.trim() ?? 'note';
+	let title = calloutMatch?.[3]?.trim();
 </script>
 
 {#if isCallout}
-	<Callout>
+	<Callout {type} {title}>
 		<slot />
 	</Callout>
 {:else}

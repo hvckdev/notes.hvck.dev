@@ -1,5 +1,4 @@
 <script lang="ts">
-	// @ts-expect-error
 	import katex from 'katex';
 	export let math: string;
 	export let displayMode = false;

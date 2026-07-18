@@ -7,8 +7,8 @@
     "test": "run-s test:db:reset test:test",
     "coverage": "run-s test:db:reset test:coverage",
     "test-watch": "dotenv -v UNIT_TEST=TRUE  -e .env.test -- vitest unit",
-    "test:test": "dotenv -e .env.test -- vitest run --no-threads",
-    "test:coverage": "dotenv -e .env.test -- vitest run --no-threads --coverage",
+    "test:test": "dotenv -e .env.test -- vitest run --no-file-parallelism",
+    "test:coverage": "dotenv -e .env.test -- vitest run --no-file-parallelism --coverage",
     "test:db:reset": "dotenv -e .env.test -- npx prisma migrate reset -f",
     "build": "npx tsc",
     "dev": "npx nodemon src/server.ts | npx pino-colada",
@@ -29,6 +29,10 @@
     "helmet": "^7.2.0",
     "pino": "^8.21.0",
     "pino-http": "^8.6.1"
+  },
+  "overrides": {
+    "@hono/node-server": "^2.0.4",
+    "hono": "^4.12.25"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

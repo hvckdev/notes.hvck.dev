@@ -2,18 +2,17 @@
 	import { getCalloutColor, getCalloutIcon } from '$lib/util/callout';
 	import CalloutIcon from '$lib/components/CalloutIcon.svelte';
 
-	export let title = '';
+	export let title: string | undefined = undefined;
 	export let type = 'note';
 	let color = '--callout-warning';
 	let icon = 'note';
-	let init = false;
 
 	let content: HTMLElement;
 
 	$: if (content) {
 		const titleElement = content.getElementsByTagName('p')[0];
-		const preFilled = title != '';
-		const match = titleElement.innerText.split('\n')[0].match(/\[!(.+)\]([+-]?)(?:\s(.+))?/);
+		const preFilled = title !== undefined;
+		const match = titleElement?.innerText.split('\n')[0].match(/\[!(.+)\]([+-]?)(?:\s(.+))?/);
 		if (match && !preFilled) {
 			type = match[1]?.trim();
 			title = match[3]?.trim() ?? type[0].toUpperCase() + type.substring(1).toLowerCase();
@@ -22,16 +21,31 @@
 		color = `--${getCalloutColor(type)}`;
 		icon = getCalloutIcon(type);
 
-		// Remove title from content
-		if (!preFilled) {
-			const pos = titleElement.innerHTML.indexOf('<br>');
-			if (pos >= 0) {
-				titleElement.innerHTML = titleElement.innerHTML.substring(pos + 4);
-			} else {
-				titleElement.innerHTML = '';
-			}
+		if (titleElement) {
+			removeCalloutMarker(titleElement);
 		}
-		init = true;
+	}
+
+	function removeCalloutMarker(titleElement: HTMLParagraphElement) {
+		const markerPattern = /^\s*\[!.+?\][+-]?(?:\s.*)?/;
+		for (const node of Array.from(titleElement.childNodes)) {
+			if (node.nodeType !== Node.TEXT_NODE) {
+				break;
+			}
+
+			const text = node.textContent ?? '';
+			if (!markerPattern.test(text)) {
+				continue;
+			}
+
+			const nextLineStart = text.indexOf('\n');
+			if (nextLineStart >= 0) {
+				node.textContent = text.substring(nextLineStart + 1);
+			} else {
+				node.textContent = '';
+			}
+			break;
+		}
 	}
 </script>
 

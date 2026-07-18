@@ -13,7 +13,6 @@ const mockedEventLogger = {
   readEvent: vi.fn(logEventToConsole),
   purgeEvent: vi.fn(logEventToConsole),
   deleteEvent: vi.fn(logEventToConsole),
-  updateEvent: vi.fn(logEventToConsole),
 };
 
 export default mockedEventLogger;
