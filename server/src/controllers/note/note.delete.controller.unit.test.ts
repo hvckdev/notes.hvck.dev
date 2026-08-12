@@ -5,6 +5,7 @@ import { vi, describe, it, beforeEach, afterEach, expect } from "vitest";
 import * as noteDao from "../../db/note.dao";
 import * as bloomFilter from "../../db/bloomFilter.dao";
 import EventLogger from "../../logging/EventLogger";
+import { hashToken } from "../../crypto/GenerateToken";
 import { deleteNoteController } from "./note.delete.controller";
 
 vi.mock("../../db/note.dao");
@@ -30,7 +31,8 @@ describe("note.delete.controller", () => {
       if (noteId === MOCK_NOTE_ID) {
         return {
           id: MOCK_NOTE_ID,
-          secret_token: MOCK_SECRET_TOKEN,
+          secret_token: null,
+          secret_token_hash: hashToken(MOCK_SECRET_TOKEN),
         } as EncryptedNote;
       } else {
         return null;

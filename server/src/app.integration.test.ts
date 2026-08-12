@@ -113,6 +113,25 @@ describe("POST /api/note", () => {
     );
   });
 
+  it("deletes a newly created note using its returned secret token", async () => {
+    const createResponse = await supertest(app).post("/api/note").send(testNote);
+
+    expect(createResponse.statusCode).toBe(200);
+    expect(createResponse.body).toMatchObject({
+      note_id: expect.any(String),
+      secret_token: expect.any(String),
+    });
+
+    const deleteResponse = await supertest(app)
+      .delete(`/api/note/${createResponse.body.note_id}`)
+      .send({ secret_token: createResponse.body.secret_token });
+
+    expect(deleteResponse.statusCode).toBe(200);
+    expect(
+      await prisma.encryptedNote.findUnique({ where: { id: createResponse.body.note_id } })
+    ).toBeNull();
+  });
+
   it("Returns a bad request on invalid POST body", async () => {
     const res = await supertest(app).post("/api/note").send({});
     expect(res.statusCode).toBe(400);

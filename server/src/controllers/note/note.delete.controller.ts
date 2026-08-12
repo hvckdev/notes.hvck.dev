@@ -1,5 +1,6 @@
 import { validateOrReject, ValidationError } from "class-validator";
 import { NextFunction, Request, Response } from "express";
+import { verifyToken } from "../../crypto/GenerateToken";
 import { deleteNote, getNote } from "../../db/note.dao";
 import checkId from "../../lib/checkUserId";
 import { getNoteFilter } from "../../lib/expiredNoteFilter";
@@ -50,8 +51,10 @@ export async function deleteNoteController(
     return;
   }
 
-  // Validate secret token
-  if (note.secret_token !== req.body.secret_token) {
+  // Validate secret token against its hash, with support for legacy plaintext tokens.
+  if (
+    !verifyToken(noteDeleteRequest.secret_token!, note.secret_token_hash, note.secret_token)
+  ) {
     res.status(401).send("Invalid token");
     event.error = "Invalid secret token";
     await EventLogger.deleteEvent(event);
