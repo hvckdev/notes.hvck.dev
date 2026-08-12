@@ -10,6 +10,11 @@ export function generateToken(): string {
   return crypto.randomBytes(TOKEN_BYTES).toString("base64");
 }
 
+/** Generates a URL-safe, 256-bit identifier for encrypted attachments. */
+export function generateAttachmentId(): string {
+  return crypto.randomBytes(TOKEN_BYTES).toString("base64url");
+}
+
 export function hashToken(token: string): string {
   return crypto.createHash("sha256").update(token, "utf8").digest("base64");
 }

@@ -17,6 +17,7 @@
 	let decryptFailed = false;
 	let showRaw = false;
 	let fileTitle: string | undefined;
+	let noteKey: string;
 
 	function toggleRaw() {
 		showRaw = !showRaw;
@@ -54,6 +55,7 @@
 	onMount(() => {
 		if (browser && note) {
 			const key = location.hash.slice(1);
+			noteKey = key;
 			decrypt({ ...note, key }, note.crypto_version)
 				.then((value) => {
 					const { body, title } = parsePayload(value);
@@ -113,7 +115,7 @@
 			{#if showRaw}
 				<RawRenderer>{plaintext}</RawRenderer>
 			{:else}
-				<MarkdownRenderer {plaintext} {fileTitle} />
+				<MarkdownRenderer {plaintext} {fileTitle} {noteKey} />
 			{/if}
 		</div>
 	</div>

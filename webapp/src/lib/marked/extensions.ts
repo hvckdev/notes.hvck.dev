@@ -1,3 +1,24 @@
+const EncryptedImageExtension = {
+	name: 'encrypted-image',
+	level: 'inline',
+	start(src: string) {
+		return src.match(/^!\[/)?.index;
+	},
+	tokenizer(src: string) {
+		const match = src.match(/^!\[([^\]]*)\]\(attachment:([A-Za-z0-9_-]{43})(?:\s+"([^"]+)")?\)/);
+		if (match) {
+			return {
+				type: 'encrypted-image',
+				raw: match[0],
+				alt: match[1],
+				attachmentId: match[2],
+				mimeType: match[3] || 'image/*'
+			};
+		}
+		return false;
+	}
+};
+
 const InternalLinkExtension = {
 	name: 'internal-link',
 	level: 'inline',
@@ -173,6 +194,7 @@ const footnote = {
 };
 
 export default [
+	EncryptedImageExtension,
 	InternalLinkExtension,
 	InternalEmbedExtension,
 	TagExtension,

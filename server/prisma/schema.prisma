@@ -20,6 +20,16 @@ model EncryptedNote {
   crypto_version    String   @default("v3")
   secret_token      String?
   secret_token_hash String?
+  attachments       EncryptedAttachment[]
+}
+
+model EncryptedAttachment {
+  id          String   @id
+  note_id     String
+  ciphertext  String
+  iv          String
+  insert_time DateTime @default(now())
+  note        EncryptedNote @relation(fields: [note_id], references: [id], onDelete: Cascade)
 }
 
 model event {

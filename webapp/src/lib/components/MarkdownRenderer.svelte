@@ -17,9 +17,11 @@
 	import Code from '$lib/marked/renderers/Code.svelte';
 	import FootnoteRef from '$lib/marked/renderers/FootnoteRef.svelte';
 	import Footnote from '$lib/marked/renderers/Footnote.svelte';
+	import EncryptedImage from '$lib/components/EncryptedImage.svelte';
 
 	export let plaintext: string;
 	export let fileTitle: string | undefined = undefined;
+	export let noteKey = '';
 
 	let ref: HTMLDivElement;
 	let footnotes: HTMLDivElement[];
@@ -96,6 +98,8 @@ prose-blockquote:first:before:content-[''] prose-hr:transition-colors prose-code
 			list: List,
 			listitem: ListItem,
 			link: Link,
+			'image': EncryptedImage,
+			'encrypted-image': EncryptedImage,
 			'internal-link': InternalLink,
 			'internal-embed': InternalEmbed,
 			tag: Tag,
@@ -109,6 +113,7 @@ prose-blockquote:first:before:content-[''] prose-hr:transition-colors prose-code
 		}}
 		source={plaintext}
 		{options}
+		{noteKey}
 	/>
 
 	<!-- footnote container -->

@@ -43,3 +43,17 @@ export class NoteDeleteRequest extends NoteRequestBody {
   @IsNotEmpty()
   secret_token: string | undefined;
 }
+
+export class AttachmentPostRequest {
+  @IsBase64()
+  @IsNotEmpty()
+  ciphertext: string | undefined;
+
+  @IsBase64()
+  @IsNotEmpty()
+  iv: string | undefined;
+
+  @IsBase64()
+  @IsNotEmpty()
+  secret_token: string | undefined;
+}

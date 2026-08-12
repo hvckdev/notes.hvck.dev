@@ -9,8 +9,6 @@ import { deleteExpiredNotes, deleteInterval } from "./tasks/deleteExpiredNotes";
 // Initialize middleware clients
 export const app: Express = express();
 
-// Enable JSON body parsing
-app.use(express.json({}));
 
 // configure logging
 app.use(
