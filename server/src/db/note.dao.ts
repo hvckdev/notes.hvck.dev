@@ -13,6 +13,16 @@ export async function createNote(note: EncryptedNote): Promise<EncryptedNote> {
   });
 }
 
+export async function updateNotePayload(
+  noteId: string,
+  payload: Pick<EncryptedNote, "ciphertext" | "iv" | "crypto_version">
+): Promise<EncryptedNote> {
+  return prisma.encryptedNote.update({
+    where: { id: noteId },
+    data: payload,
+  });
+}
+
 export async function getExpiredNotes(): Promise<EncryptedNote[]> {
   return prisma.encryptedNote.findMany({
     where: {

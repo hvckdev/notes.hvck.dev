@@ -208,6 +208,118 @@ describe("POST /api/note", () => {
 });
 
 
+describe("PUT /api/note/:noteId", () => {
+  const draftPayload = {
+    ciphertext: Buffer.from("draft ciphertext").toString("base64"),
+    iv: Buffer.from("012345678901").toString("base64"),
+    crypto_version: "v3",
+  };
+  const finalizedPayload = {
+    ciphertext: Buffer.from("final ciphertext containing attachment reference").toString("base64"),
+    iv: Buffer.from("109876543210").toString("base64"),
+    crypto_version: "v3",
+  };
+
+  async function createDraft() {
+    const response = await supertest(app).post("/api/note").send(draftPayload);
+    expect(response.statusCode).toBe(200);
+    return response.body as { note_id: string; secret_token: string };
+  }
+
+  it("replaces a draft payload and preserves its uploaded attachments", async () => {
+    const draft = await createDraft();
+    const attachmentPayload = {
+      ciphertext: Buffer.from("encrypted image bytes").toString("base64"),
+      iv: Buffer.from("abcdefghijkl").toString("base64"),
+      secret_token: draft.secret_token,
+    };
+
+    const attachmentResponse = await supertest(app)
+      .post(`/api/note/${draft.note_id}/attachment`)
+      .send(attachmentPayload);
+    expect(attachmentResponse.statusCode).toBe(201);
+
+    const updateResponse = await supertest(app)
+      .put(`/api/note/${draft.note_id}`)
+      .send({ ...finalizedPayload, secret_token: draft.secret_token });
+    expect(updateResponse.statusCode).toBe(200);
+    expect(updateResponse.body).toMatchObject({
+      note_id: draft.note_id,
+      view_url: expect.stringContaining(`/note/${draft.note_id}`),
+      expire_time: expect.any(String),
+    });
+    expect(updateResponse.body).not.toHaveProperty("secret_token");
+
+    const noteResponse = await supertest(app).get(`/api/note/${draft.note_id}`);
+    expect(noteResponse.statusCode).toBe(200);
+    expect(noteResponse.body).toMatchObject(finalizedPayload);
+
+    const attachmentReadResponse = await supertest(app).get(
+      `/api/note/attachment/${attachmentResponse.body.attachment_id}`
+    );
+    expect(attachmentReadResponse.statusCode).toBe(200);
+    expect(attachmentReadResponse.body).toEqual({
+      ciphertext: attachmentPayload.ciphertext,
+      iv: attachmentPayload.iv,
+    });
+  });
+
+  it("returns 404 for a note that does not exist", async () => {
+    const response = await supertest(app)
+      .put("/api/note/nonexistent")
+      .send({ ...finalizedPayload, secret_token: Buffer.from("valid token").toString("base64") });
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  it("rejects a valid note update with an invalid secret token", async () => {
+    const draft = await createDraft();
+    const response = await supertest(app).put(`/api/note/${draft.note_id}`).send({
+      ...finalizedPayload,
+      secret_token: Buffer.from("wrong token").toString("base64"),
+    });
+
+    expect(response.statusCode).toBe(401);
+
+    const note = await prisma.encryptedNote.findUnique({ where: { id: draft.note_id } });
+    expect(note).toMatchObject(draftPayload);
+  });
+
+  it("does not persist or audit non-payload data supplied by a client", async () => {
+    const draft = await createDraft();
+    const plaintext = "# private plaintext markdown";
+    const noteKey = "super-secret-note-key";
+    const filename = "private-image.png";
+    const mimeType = "image/png";
+
+    const response = await supertest(app).put(`/api/note/${draft.note_id}`).send({
+      ...finalizedPayload,
+      secret_token: draft.secret_token,
+      plaintext,
+      note_key: noteKey,
+      filename,
+      mime_type: mimeType,
+    });
+    expect(response.statusCode).toBe(200);
+
+    const note = await prisma.encryptedNote.findUnique({ where: { id: draft.note_id } });
+    expect(note).toMatchObject(finalizedPayload);
+    expect(JSON.stringify(note)).not.toContain(plaintext);
+    expect(JSON.stringify(note)).not.toContain(noteKey);
+    expect(JSON.stringify(note)).not.toContain(filename);
+    expect(JSON.stringify(note)).not.toContain(mimeType);
+
+    const events = await prisma.event.findMany({ where: { note_id: draft.note_id } });
+    expect(JSON.stringify(events)).not.toContain(finalizedPayload.ciphertext);
+    expect(JSON.stringify(events)).not.toContain(finalizedPayload.iv);
+    expect(JSON.stringify(events)).not.toContain(draft.secret_token);
+    expect(JSON.stringify(events)).not.toContain(plaintext);
+    expect(JSON.stringify(events)).not.toContain(noteKey);
+    expect(JSON.stringify(events)).not.toContain(filename);
+    expect(JSON.stringify(events)).not.toContain(mimeType);
+  });
+});
+
 describe("Clean expired notes", () => {
   it("removes expired notes", async () => {
     // insert a note with expiry date in the past using prisma

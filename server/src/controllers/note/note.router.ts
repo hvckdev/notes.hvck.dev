@@ -7,6 +7,7 @@ import {
 import { deleteNoteController } from "./note.delete.controller";
 import { getNoteController } from "./note.get.controller";
 import { postNoteController } from "./note.post.controller";
+import { putNoteController } from "./note.put.controller";
 
 export const notesRoute = express.Router();
 
@@ -36,6 +37,7 @@ notesRoute.post(
   attachmentJsonParser,
   postAttachmentController
 );
+notesRoute.put("/:noteId", postRateLimit, noteJsonParser, putNoteController);
 notesRoute.get("/attachment/:id", getRateLimit, getAttachmentController);
 notesRoute.get("/:id", getRateLimit, getNoteController);
 notesRoute.delete("/:id", noteJsonParser, getRateLimit, deleteNoteController);

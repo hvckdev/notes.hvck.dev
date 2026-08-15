@@ -44,6 +44,24 @@ export class NoteDeleteRequest extends NoteRequestBody {
   secret_token: string | undefined;
 }
 
+/** Payload used to finalize an AES-GCM draft after attachment IDs are known. */
+export class NotePutRequest extends NoteRequestBody {
+  @IsBase64()
+  @IsNotEmpty()
+  ciphertext: string | undefined;
+
+  @IsBase64()
+  @IsNotEmpty()
+  iv: string | undefined;
+
+  @IsBase64()
+  @IsNotEmpty()
+  secret_token: string | undefined;
+
+  @IsIn(["v3"])
+  crypto_version: string = "v3";
+}
+
 export class AttachmentPostRequest {
   @IsBase64()
   @IsNotEmpty()
