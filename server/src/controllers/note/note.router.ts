@@ -10,7 +10,9 @@ import { postNoteController } from "./note.post.controller";
 
 export const notesRoute = express.Router();
 
-const noteJsonParser = express.json({ limit: "500k" });
+// This cap bounds memory used while parsing each upload.
+// Ciphertext is Base64-encoded, so the request limit includes its encoding overhead.
+const noteJsonParser = express.json({ limit: process.env.NOTE_JSON_LIMIT || "10mb" });
 const attachmentJsonParser = express.json({ limit: "7mb" });
 
 const postRateLimit = rateLimit({
@@ -27,11 +29,11 @@ const getRateLimit = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-notesRoute.post("", noteJsonParser, postRateLimit, postNoteController);
+notesRoute.post("", postRateLimit, noteJsonParser, postNoteController);
 notesRoute.post(
   "/:noteId/attachment",
-  attachmentJsonParser,
   postRateLimit,
+  attachmentJsonParser,
   postAttachmentController
 );
 notesRoute.get("/attachment/:id", getRateLimit, getAttachmentController);

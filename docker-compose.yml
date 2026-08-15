@@ -38,6 +38,8 @@ services:
       - FRONTEND_URL=https://notes.hvck.dev
       - CLEANUP_INTERVAL_SECONDS=600
       - NODE_ENV=production
+      # Maximum JSON request size for an encrypted note (includes Base64 overhead).
+      - NOTE_JSON_LIMIT=10mb
       # Rate limit for uploading notes
       - POST_LIMIT_WINDOW_SECONDS=86400
       - POST_LIMIT=50

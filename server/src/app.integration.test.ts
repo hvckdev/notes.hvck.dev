@@ -164,10 +164,21 @@ describe("POST /api/note", () => {
     expect(res.body.hmac).toEqual(testNote.hmac);
   });
 
-  it("Applies upload limit to endpoint of 500kb", async () => {
+  it("accepts notes larger than the legacy 500 KB limit", async () => {
     const largeNote = {
-      ciphertext: "a".repeat(500 * 1024),
-      hmac: "sample_hmac",
+      ciphertext: "a".repeat(1024 * 1024),
+      crypto_version: "v3",
+      iv: Buffer.from("012345678901").toString("base64"),
+    };
+    const res = await supertest(app).post("/api/note").send(largeNote);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("rejects notes larger than the configured upload limit", async () => {
+    const largeNote = {
+      ciphertext: "a".repeat(10 * 1024 * 1024),
+      crypto_version: "v3",
+      iv: Buffer.from("012345678901").toString("base64"),
     };
     const res = await supertest(app).post("/api/note").send(largeNote);
     expect(res.statusCode).toBe(413);
