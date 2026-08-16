@@ -15,7 +15,8 @@
 			const response = await fetch(`/api/note/attachment/${attachmentId}`);
 			if (!response.ok) throw new Error('Attachment not found');
 			const attachment = await response.json();
-			imageUrl = URL.createObjectURL(await decryptAttachment(attachment, noteKey, mimeType));
+			const plaintext = await decryptAttachment(noteKey, attachment.ciphertext, attachment.iv);
+			imageUrl = URL.createObjectURL(new Blob([plaintext], { type: mimeType }));
 		} catch {
 			failed = true;
 		}
